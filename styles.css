@@ -1,0 +1,35 @@
+/* ====  RESET PADRÃO  ==== */
+* {
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ====  VARIÁVEIS  ==== */
+:root {
+    /* -- cores -- */
+    --bg-primary: #020202;
+    --bg-secondary: #111012;
+    --bg-tertiary: #24222E;
+    --bg-brand: #C58DE7;
+    --bg-gray: #3D3D3D;
+    --content-primary: #FFFFFF;
+    --content-secondary: #C7C9CC;
+    --content-tertiary: #D9D9D9;
+    --content-brand: #C58DE7;
+    --color-inverse: #030203;
+
+    /* -- tipografia  -- */
+    --ff1: "Sora", sans-serif;
+    --ff2:"Roboto Mono", monospace;
+    --ff3:"Roboto Flex", sans-serif;
+    --dp-lg: 800 1.3/4.5rem var(--ff1);                             /* 72px */
+    --dp-md: 800 1.3/2.5rem var(--ff1);                             /* 40px */
+    --dp-sm: 700 1.3/2rem var(--ff1);                               /* 32px */
+    --overline: 700 1.5/1rem var(--ff2);                            /* 16px */
+    --text-lg: 500 1.5/1rem var(--ff3);                             /* 16px */
+    --text-md: 500 1.5/0.875rem var(--ff3);                         /* 14px */
+    --text-sm: 500 1.5/0.75rem var(--ff3);                          /* 12px */
+    --label-md: 700 1.5/1.25rem var(--ff3);
+    --label-sm: 700 1.5/1rem var(--ff3);
+}
