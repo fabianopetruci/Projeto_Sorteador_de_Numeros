@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
@@ -26,27 +27,36 @@
         </div>
         
         <!-- ==== ENTRADA DE DADOS (FORM) ==== -->
-        <form>
-            <h2>QUERO SORTEAR:</h2>
-            <p>Defina o intervalo e a quantidade de números, clique em
-               "Sortear" e veja os resultados na tela. É rápido e fácil!
-            </p>
-            <legend>Qtd Números</legend>
-            <input type="number" name="number-qtd" id="number-qtd" placeholder="1">
+         <div id="form-area">
+            <form>
+                <h2>QUERO SORTEAR:</h2>
+                <p>Defina o intervalo e a quantidade de números, clique em
+                "Sortear" e veja os resultados na tela. É rápido e fácil!
+                </p>
+                <div class="fields">
+                    <div class="field">
+                        <label for="number-qtd">Números</label>
+                        <input type="number" name="number-qtd" id="number-qtd" value="1" min="1" step="1">
+                    </div>
+                    <div class="field">
+                        <label for="range-min">De</label>
+                        <input type="number" name="range-min" id="range-min" value="1" min="1" step="1">
+                    </div>
+                    <div class="field">
+                        <label for="range-max">Até</label>
+                        <input type="number" name="range-max" id="range-max" value="2" max="100" step="1">
+                    </div>
+                </div>
+                
+                <label class="switch">
+                    <input type="checkbox" id="no-repeat">
+                    <span class="slider"></span>
+                    Não repetir número
+                </label>
 
-            <legend>De</legend>
-            <input type="number" name="range-min" id="range-min" placeholder="1">
-
-            <legend>Até</legend>
-            <input type="number" name="range-max" id="range-qtd" placeholder="1">
-
-            <div id="switch" onclick="noRepeat()">
-                <button></button>
-                <span></span>
-            </div>
-
-            <button type="submit">SORTEAR</button>
-        </form>
+                <button type="submit" class="btn-draw">SORTEAR<span aria-hidden="true">→</span></button>
+            </form>
+        </div>
 
         <!-- ==== DÚVIDAS ==== -->
         <div id="questions" class="questions">
