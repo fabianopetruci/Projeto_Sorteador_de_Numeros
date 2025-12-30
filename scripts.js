@@ -1,1 +1,3 @@
-console.log("isso é um teste.")
+function noRepeat() {
+
+}

@@ -9,9 +9,64 @@
     <title>Numbers - Sorteador de Números</title>
     <link rel="stylesheet" href="./styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght,XOPQ,XTRA,YOPQ,YTDE,YTFI,YTLC,YTUC@8..144,100..1000,96,468,79,-203,738,514,712&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Sora:wght@100..800&display=swap" rel="stylesheet">
-    
+
 </head>
 <body>
+    <header>
+        <div id="logo">
+            <img src="./assets/logo.svg" alt="símbolo da logomarca">
+            <h2>NUMBERS</h2>
+        </div>
+    </header>
+    <main>
+        <!-- ==== TÍTULO DA PÁGINA ==== -->
+        <div id="content-title">
+            <h3>ONLINE - GRATUITO</h3>
+            <h1>SORTEADOR DE NÚMEROS</h1>
+        </div>
+        
+        <!-- ==== ENTRADA DE DADOS (FORM) ==== -->
+        <form>
+            <h2>QUERO SORTEAR:</h2>
+            <p>Defina o intervalo e a quantidade de números, clique em
+               "Sortear" e veja os resultados na tela. É rápido e fácil!
+            </p>
+            <legend>Qtd Números</legend>
+            <input type="number" name="number-qtd" id="number-qtd" placeholder="1">
+
+            <legend>De</legend>
+            <input type="number" name="range-min" id="range-min" placeholder="1">
+
+            <legend>Até</legend>
+            <input type="number" name="range-max" id="range-qtd" placeholder="1">
+
+            <div id="switch" onclick="noRepeat()">
+                <button></button>
+                <span></span>
+            </div>
+
+            <button type="submit">SORTEAR</button>
+        </form>
+
+        <!-- ==== DÚVIDAS ==== -->
+        <div id="questions" class="questions">
+            <div id="question-1">
+                <img src="./assets/obs.svg" alt="ícone de pessoa respondendo">
+                <p>Como funciona o sorteador de números?</p>
+                <p>O sorteador utiliza um algoritmo de geração aleatória para
+                   criar números dentro do intervalo especificado pelo usuário.
+                </p>
+            </div>
+
+            <div id="question-2">
+                <img src="./assets/obs.svg" alt="ícone de pessoa respondendo">
+                <p>Posso escolher o intervalo dos números?</p>
+                <p>Sim, você pode definir os valores mínimo e máximo para o
+                   intervalo dos números sorteados.
+                </p>
+            </div>
+        </div>
+    </main>
     <script src="./scripts.js"></script>
 </body>
 </html>
