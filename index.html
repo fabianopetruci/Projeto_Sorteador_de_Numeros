@@ -16,7 +16,7 @@
     <header>
         <div id="logo">
             <img src="./assets/logo.svg" alt="símbolo da logomarca">
-            <h2>NUMBERS</h2>
+            <h2 class="brand-animated">NUMBERS</h2>
         </div>
     </header>
     <main>
@@ -36,15 +36,21 @@
                 <div class="fields">
                     <div class="field">
                         <label for="number-qtd">Números</label>
-                        <input type="number" name="number-qtd" id="number-qtd" value="1" min="1" step="1">
+                        <div class="input-wrap">
+                            <input type="number" name="number-qtd" id="number-qtd" value="1" min="1" step="1">
+                        </div>
                     </div>
                     <div class="field">
                         <label for="range-min">De</label>
-                        <input type="number" name="range-min" id="range-min" value="1" min="1" step="1">
+                        <div class="input-wrap">
+                            <input type="number" name="range-min" id="range-min" value="1" min="1" step="1">
+                        </div>
                     </div>
                     <div class="field">
                         <label for="range-max">Até</label>
-                        <input type="number" name="range-max" id="range-max" value="2" max="100" step="1">
+                        <div class="input-wrap">
+                            <input type="number" name="range-max" id="range-max" value="2" max="100" step="1">
+                        </div>
                     </div>
                 </div>
                 
