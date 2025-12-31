@@ -262,6 +262,51 @@ input[type="number"] {
   mask-composite: exclude;
 }
 
+/* ==== DÚVIDAS / FAQ ==== */
+.questions {
+  width: min(319px, 100%);
+  margin-inline: auto;
+  margin-top: 5rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.question-item {
+  width: 100%;
+  padding: 1rem .5rem;
+  border-radius: 1rem;
+
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.06);
+}
+
+.question-header {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  margin-bottom: .5rem;
+}
+
+.question-header img {
+  width: 20px;
+  height: 20px;
+  opacity: .9;
+}
+
+.question-header h3 {
+  font: var(--text-md);
+  color: var(--bg-brand);
+}
+
+.question-item p {
+  font: var(--text-md);
+  color: var(--content-secondary);
+  line-height: 1.6;
+
+  max-width: 100%;
+  text-align: left;
+}
+
 /* ==== ANIMAÇÕES ==== */
 @keyframes gradientMove {
   0% { background-position: 0% 50%; }
