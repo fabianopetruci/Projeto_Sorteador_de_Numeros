@@ -20,21 +20,30 @@ form.onsubmit = (event) => {
     }
 
     // Exibe alerta caso o valor da quantidade supere o total de números disponíveis do intervalo
-    if (input1 > range && noRepeat) {
+    if (input1 > range && input4) {
         return alert ("O valor da quantidade é maior que o total de números disponíveis. Por favor diminua a quantidade ou aumente o limite máximo do intervalo.")
     }
 
     let numerosSorteados = []
 
-do {
-    /* Cria uma variável (numeroEscolhido) para receber um número aleatório
-   gerado por Math.random (0 a 0.9999...), que é ajustado ao intervalo
-   multiplicando pelo range e somando o limite mínimo, e então convertido
-   em inteiro com Math.floor */
-    const numeroEscolhido = Math.floor(Math.random() * (input3 - input2 + 1)) + input2
-    numerosSorteados.push(numeroEscolhido)
-    console.log(numeroEscolhido)
-    console.log(numerosSorteados)
+    do {
+        /* Cria uma variável (numeroEscolhido) para receber um número aleatório
+    gerado por Math.random (0 a 0.9999...), que é ajustado ao intervalo
+    multiplicando pelo range e somando o limite mínimo, e então convertido
+    em inteiro com Math.floor */
+        const numeroEscolhido = Math.floor(Math.random() * (input3 - input2 + 1)) + input2
+        
+        if (input4) {
+            /*  (noRepeat - on) Se o número sorteado AINDA NÃO (!) estiver na na lista de
+               números sorteados, então coloque esse número na lista */
+            if (!numerosSorteados.includes(numeroEscolhido)) {
+                numerosSorteados.push(numeroEscolhido)
+            }
 
-} while (numerosSorteados.length < input1)
+            /* (noRepeat - off) Caso contrário, coloque o número sorteado na lista */
+        } else {
+            numerosSorteados.push(numeroEscolhido)
+        }
+
+    } while (numerosSorteados.length < input1)
 }
