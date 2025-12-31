@@ -23,4 +23,18 @@ form.onsubmit = (event) => {
     if (input1 > range && noRepeat) {
         return alert ("O valor da quantidade é maior que o total de números disponíveis. Por favor diminua a quantidade ou aumente o limite máximo do intervalo.")
     }
+
+    let numerosSorteados = []
+
+do {
+    /* Cria uma variável (numeroEscolhido) para receber um número aleatório
+   gerado por Math.random (0 a 0.9999...), que é ajustado ao intervalo
+   multiplicando pelo range e somando o limite mínimo, e então convertido
+   em inteiro com Math.floor */
+    const numeroEscolhido = Math.floor(Math.random() * (input3 - input2 + 1)) + input2
+    numerosSorteados.push(numeroEscolhido)
+    console.log(numeroEscolhido)
+    console.log(numerosSorteados)
+
+} while (numerosSorteados.length < input1)
 }
