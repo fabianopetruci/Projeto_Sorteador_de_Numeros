@@ -317,3 +317,54 @@ input[type="number"] {
   0%   { background-position: 0 0, 0% 50%; }
   100% { background-position: 0 0, 100% 50%; }
 }
+
+
+/* ==== MEDIA QUERIES ==== */
+@media (min-width: 1024px){
+  body{
+    padding: 3.5rem 5rem;
+  }
+
+  main{
+    max-width: 1120px;
+    margin-inline: auto;
+
+    display: grid;
+    grid-template-columns: 1fr 520px;
+    column-gap: 4.5rem;
+    row-gap: 2.5rem;
+
+    grid-template-areas:
+      "logo  ."
+      "title form"
+      "faq   form";
+    align-items: start;
+  }
+
+  #logo{
+    grid-area: logo;
+    justify-content: flex-start;
+    margin: 0;
+  }
+
+  #content-title{
+    grid-area: title;
+    width: 100%;
+    margin: 0;
+  }
+
+  #form-area{
+    grid-area: form;
+    width: 100%;
+    margin: 0;
+  }
+
+  .questions{
+    grid-area: faq;
+    width: 100%;
+    max-width: 520px;
+    margin: 0;
+  }
+}
+
+
