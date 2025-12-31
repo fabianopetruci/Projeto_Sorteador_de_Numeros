@@ -20,6 +20,7 @@
   --ff2: "Roboto Mono", monospace;
   --ff3: "Roboto Flex", sans-serif;
 
+  --dp-lg: 800 4.5rem/1.3 var(--ff1);
   --dp-md: 800 2.5rem/1.3 var(--ff1);
   --dp-sm: 700 1.5rem/1.3 var(--ff1);
 
@@ -321,11 +322,11 @@ input[type="number"] {
 
 /* ==== MEDIA QUERIES ==== */
 @media (min-width: 1024px){
-  body{
+  body {
     padding: 3.5rem 5rem;
   }
 
-  main{
+  main {
     max-width: 1120px;
     margin-inline: auto;
 
@@ -347,19 +348,23 @@ input[type="number"] {
     margin: 0;
   }
 
-  #content-title{
+  #content-title {
     grid-area: title;
     width: 100%;
     margin: 0;
   }
 
-  #form-area{
+  #content-title h1 {
+    font: var(--dp-lg);
+  }
+
+  #form-area {
     grid-area: form;
     width: 100%;
     margin: 0;
   }
 
-  .questions{
+  .questions {
     grid-area: faq;
     width: 100%;
     max-width: 520px;
