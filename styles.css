@@ -52,6 +52,10 @@ body {
   height: 38px;
 }
 
+#results-area {
+    display: block;
+}
+
 #logo h2 {
   font: var(--dp-sm);
   background: linear-gradient(
@@ -90,6 +94,7 @@ body {
 #form-area {
   width: min(319px, 100%);
   margin-inline: auto;
+  display: none;
 }
 
 #form-area h2 {
@@ -319,6 +324,123 @@ input[type="number"] {
   100% { background-position: 0 0, 100% 50%; }
 }
 
+/* ==== RESULTADOS ==== */
+#results-area {
+  width: min(319px, 100%);
+  margin-inline: auto;
+  display: block; /* JS vai ligar */
+  text-align: center;
+}
+
+.results-header h2 {
+  font: var(--label-md);
+  letter-spacing: .04em;
+  margin-bottom: .5rem;
+}
+
+.results-subtitle {
+  font: var(--overline);
+  color: var(--content-secondary);
+  margin-bottom: 2rem;
+}
+
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* mobile: 2 colunas */
+  gap: 1rem;
+  justify-items: center;
+  margin-bottom: 2rem;
+}
+
+/* desktop: 4 colunas */
+@media (min-width: 1024px) {
+  #results-area {
+    width: 100%;
+    margin: 0;
+    grid-area: form; /* ocupa o lugar do form no grid do desktop */
+  }
+
+  .results-grid {
+    grid-template-columns: repeat(4, 1fr);
+    justify-items: start;
+    text-align: left;
+  }
+
+  .results-header {
+    text-align: left;
+  }
+}
+
+/* botão sortear novamente (reaproveita estilo do seu botão) */
+.btn-again {
+  display: flex;
+}
+
+/* ==== SLOT (1 número) ==== */
+.result-slot {
+  width: 84px;
+  height: 84px;
+  border-radius: 1.25rem;
+  background: rgba(197,141,231,.18);
+  display: grid;
+  place-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* camada roleta */
+.slot-reel {
+  width: 38px;
+  height: 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* trilha que “desce” */
+.slot-track {
+  display: grid;
+  gap: 10px;
+  animation: reelDown 700ms linear infinite;
+}
+
+/* cada quadradinho */
+.slot-dot {
+  width: 24px;
+  height: 24px;
+  border-radius: .55rem;
+  background: linear-gradient(
+    135deg,
+    #C58DE7,
+    #7B5CFF,
+    #00D1FF
+  );
+  opacity: .95;
+}
+
+/* estado final (número) — por enquanto escondido */
+.slot-number {
+  position: absolute;
+  inset: 0;
+  display: none;
+  place-items: center;
+  font: 800 2.25rem/1 var(--ff1);
+  color: #111012;
+  background: #C58DE7; /* pode mudar depois */
+}
+
+/* quando virar final */
+.result-slot.is-done .slot-reel {
+  display: none;
+}
+.result-slot.is-done .slot-number {
+  display: grid;
+}
+
+/* rolagem */
+@keyframes reelDown {
+  from { transform: translateY(-34px); }
+  to   { transform: translateY(34px); }
+}
 
 /* ==== MEDIA QUERIES ==== */
 @media (min-width: 1024px){
