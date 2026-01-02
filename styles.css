@@ -52,20 +52,9 @@ body {
   height: 38px;
 }
 
-#results-area {
-    display: block;
-}
-
 #logo h2 {
   font: var(--dp-sm);
-  background: linear-gradient(
-    90deg,
-    #77C0AF,
-    #D1DC97,
-    #E9A9B3,
-    #D586E0,
-    #91A1FA
-  );
+  background: linear-gradient(90deg, #77C0AF, #D1DC97, #E9A9B3, #D586E0, #91A1FA);
   background-size: 300% 100%;
   -webkit-background-clip: text;
   background-clip: text;
@@ -94,7 +83,7 @@ body {
 #form-area {
   width: min(319px, 100%);
   margin-inline: auto;
-  display: none;
+  display: block;
 }
 
 #form-area h2 {
@@ -123,12 +112,10 @@ body {
   color: var(--content-secondary);
 }
 
-/* wrapper do input */
 .input-wrap {
   border-radius: .75rem;
 }
 
-/* input padrão */
 .input-wrap input {
   width: 100%;
   height: 3.5rem;
@@ -144,20 +131,10 @@ body {
   outline: none;
 }
 
-/* foco com borda gradiente animada */
 .input-wrap input:focus {
   background:
     linear-gradient(var(--bg-secondary), var(--bg-secondary)) padding-box,
-    linear-gradient(
-      90deg,
-      #C58DE7,
-      #7B5CFF,
-      #00D1FF,
-      #00FFB2,
-      #FFC857,
-      #FF5CAA,
-      #C58DE7
-    ) border-box;
+    linear-gradient(90deg, #C58DE7, #7B5CFF, #00D1FF, #00FFB2, #FFC857, #FF5CAA, #C58DE7) border-box;
 
   background-size: 100% 100%, 300% 100%;
   animation: gradientBorder 2s linear infinite;
@@ -240,7 +217,6 @@ input[type="number"] {
   overflow: hidden;
 }
 
-/* só a BORDA animada */
 .btn-draw::before {
   content:"";
   position: absolute;
@@ -248,16 +224,7 @@ input[type="number"] {
   padding: 2px;
   border-radius: inherit;
 
-  background: linear-gradient(
-    90deg,
-    #C58DE7,
-    #7B5CFF,
-    #00D1FF,
-    #00FFB2,
-    #FFC857,
-    #FF5CAA,
-    #C58DE7
-  );
+  background: linear-gradient(90deg, #C58DE7, #7B5CFF, #00D1FF, #00FFB2, #FFC857, #FF5CAA, #C58DE7);
   background-size: 300% 100%;
   animation: gradientMove 2s linear infinite;
 
@@ -266,6 +233,88 @@ input[type="number"] {
     linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
+}
+
+/* ==== RESULTADOS ==== */
+#results-area {
+  width: min(319px, 100%);
+  margin-inline: auto;
+  display: none; /* JS liga */
+  text-align: center;
+}
+
+.results-header h2 {
+  font: var(--label-md);
+  letter-spacing: .04em;
+  margin-bottom: .5rem;
+}
+
+.results-subtitle {
+  font: var(--overline);
+  color: var(--content-secondary);
+  margin-bottom: 2rem;
+}
+
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  justify-items: center;
+  margin-bottom: 2rem;
+}
+
+.btn-again {
+  display: flex;
+}
+
+/* ==== SLOT (1 número) ==== */
+.result-slot {
+  width: 84px;
+  height: 84px;
+  border-radius: 1.25rem;
+  background: rgba(197,141,231,.18);
+  display: grid;
+  place-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.slot-reel {
+  width: 38px;
+  height: 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+.slot-track {
+  display: grid;
+  gap: 10px;
+  animation: reelDown 700ms linear infinite;
+}
+
+.slot-dot {
+  width: 24px;
+  height: 24px;
+  border-radius: .55rem;
+  background: linear-gradient(135deg, #C58DE7, #7B5CFF, #00D1FF);
+  opacity: .95;
+}
+
+.slot-number {
+  position: absolute;
+  inset: 0;
+  display: none;
+  place-items: center;
+  font: 800 2.25rem/1 var(--ff1);
+  color: #111012;
+  background: #C58DE7;
+}
+
+.result-slot.is-done .slot-reel {
+  display: none;
+}
+.result-slot.is-done .slot-number {
+  display: grid;
 }
 
 /* ==== DÚVIDAS / FAQ ==== */
@@ -308,7 +357,6 @@ input[type="number"] {
   font: var(--text-md);
   color: var(--content-secondary);
   line-height: 1.6;
-
   max-width: 100%;
   text-align: left;
 }
@@ -324,119 +372,6 @@ input[type="number"] {
   100% { background-position: 0 0, 100% 50%; }
 }
 
-/* ==== RESULTADOS ==== */
-#results-area {
-  width: min(319px, 100%);
-  margin-inline: auto;
-  display: block; /* JS vai ligar */
-  text-align: center;
-}
-
-.results-header h2 {
-  font: var(--label-md);
-  letter-spacing: .04em;
-  margin-bottom: .5rem;
-}
-
-.results-subtitle {
-  font: var(--overline);
-  color: var(--content-secondary);
-  margin-bottom: 2rem;
-}
-
-.results-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); /* mobile: 2 colunas */
-  gap: 1rem;
-  justify-items: center;
-  margin-bottom: 2rem;
-}
-
-/* desktop: 4 colunas */
-@media (min-width: 1024px) {
-  #results-area {
-    width: 100%;
-    margin: 0;
-    grid-area: form; /* ocupa o lugar do form no grid do desktop */
-  }
-
-  .results-grid {
-    grid-template-columns: repeat(4, 1fr);
-    justify-items: start;
-    text-align: left;
-  }
-
-  .results-header {
-    text-align: left;
-  }
-}
-
-/* botão sortear novamente (reaproveita estilo do seu botão) */
-.btn-again {
-  display: flex;
-}
-
-/* ==== SLOT (1 número) ==== */
-.result-slot {
-  width: 84px;
-  height: 84px;
-  border-radius: 1.25rem;
-  background: rgba(197,141,231,.18);
-  display: grid;
-  place-items: center;
-  position: relative;
-  overflow: hidden;
-}
-
-/* camada roleta */
-.slot-reel {
-  width: 38px;
-  height: 60px;
-  position: relative;
-  overflow: hidden;
-}
-
-/* trilha que “desce” */
-.slot-track {
-  display: grid;
-  gap: 10px;
-  animation: reelDown 700ms linear infinite;
-}
-
-/* cada quadradinho */
-.slot-dot {
-  width: 24px;
-  height: 24px;
-  border-radius: .55rem;
-  background: linear-gradient(
-    135deg,
-    #C58DE7,
-    #7B5CFF,
-    #00D1FF
-  );
-  opacity: .95;
-}
-
-/* estado final (número) — por enquanto escondido */
-.slot-number {
-  position: absolute;
-  inset: 0;
-  display: none;
-  place-items: center;
-  font: 800 2.25rem/1 var(--ff1);
-  color: #111012;
-  background: #C58DE7; /* pode mudar depois */
-}
-
-/* quando virar final */
-.result-slot.is-done .slot-reel {
-  display: none;
-}
-.result-slot.is-done .slot-number {
-  display: grid;
-}
-
-/* rolagem */
 @keyframes reelDown {
   from { transform: translateY(-34px); }
   to   { transform: translateY(34px); }
@@ -484,6 +419,22 @@ input[type="number"] {
     grid-area: form;
     width: 100%;
     margin: 0;
+  }
+
+  #results-area {
+    grid-area: form;
+    width: 100%;
+    margin: 0;
+    text-align: left;
+  }
+
+  .results-grid {
+    grid-template-columns: repeat(4, 1fr);
+    justify-items: start;
+  }
+
+  .results-header {
+    text-align: left;
   }
 
   .questions {
