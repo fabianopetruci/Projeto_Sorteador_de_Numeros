@@ -28,67 +28,32 @@ const btnAgain = document.getElementById("btn-again")
 // Fica fora das funções para não zerar a cada execução
 let contadorSorteios = 0
 
-// Executa quando o usuário clicar em Sortear
-form.onsubmit = (event) => {
-    // Impede o comportamento padrão do formulário (recarregar a página)
-    event.preventDefault()
-
-    // Converte os valores dos inputs para número
-    let inputQtd = Number(qtd.value)
-    let inputMin = Number (min.value)
-    let inputMax = Number (max.value)
-    let repetir = (noRepeat.checked)
-
-    // Calcula quantos números existem no intervalo
-    const range = inputMax - inputMin + 1
-
-    // Exibe alerta caso o valor do limite mínimo do intervalo seja maior que o limite máximo.
-    if (inputMin > inputMax) {
-        return alert ("Não é possível sortear. Diminua o valor do limite mínimo do intervalo")
-    }
-
-    // Exibe alerta caso o valor da quantidade supere o total de números disponíveis do intervalo
-    if (inputQtd > range && repetir) {
-        return alert ("O valor da quantidade é maior que o total de números disponíveis. Por favor diminua a quantidade ou aumente o limite máximo do intervalo.")
-    }
-
-    // Array que armazenará os números sorteados
-    let numerosSorteados = []
-
-    // Loop de sorteio
-    // Continua até atingir a quantidade desejada
-    do {
-        /* Cria uma variável (numeroEscolhido) para receber um número aleatório
-    gerado por Math.random (0 a 0.9999...), que é ajustado ao intervalo
-    multiplicando pelo range e somando o limite mínimo, e então convertido
-    em inteiro com Math.floor */
-        const numeroEscolhido = Math.floor(Math.random() * (input3 - input2 + 1)) + input2
-        
-        if (repetir) {
-            /*  (noRepeat - on) Se o número sorteado AINDA NÃO (!) estiver na na lista de
-               números sorteados, então coloque esse número na lista */
-            if (!numerosSorteados.includes(numeroEscolhido)) {
-                numerosSorteados.push(numeroEscolhido)
-            }
-
-            /* (noRepeat - off) Caso contrário, coloque o número sorteado na lista */
-        } else {
-            numerosSorteados.push(numeroEscolhido)
-        }
-
-    } while (numerosSorteados.length < input1)
-    
-    // Chama a função que cuida da exibição e animação
-    mostrarResultados(numerosSorteados)
+// Função auxiliar que cria uma pausa artificial no código
+// Retorna uma Promise que é resolvida após X milissegundos
+// Usada com await para criar a revelação sequencial
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms))
 }
 
-// Função responsável por:
-// - trocar a tela
-// - criar os slots animados
-// - revelar os números um a um
+// Função para resetar a tela inicial
+function resetarTela() {
+    // volta para o formulário
+    resultsArea.style.display = "none"
+    formArea.style.display = "block"
+
+    // limpa o grid e esconde botão sortear novamente
+    resultsGrid.innerHTML = ""
+    btnAgain.style.display = "none"
+}
+
+// Função responsável por mostrar resultados + animação
 async function mostrarResultados(numerosSorteados) {
     // === FASE 0: PREPARAÇÃO DA INTERFACE ===
-    // Esconde o formulário
+    //Mostra o número do sorteio
+    contadorSorteios += 1
+    resultCount.textContent = `${contadorSorteios}º`
+
+    // Oculta o formulário
     formArea.style.display = "none"
 
     // Mostra a área de resultados
@@ -97,11 +62,13 @@ async function mostrarResultados(numerosSorteados) {
     // Limpa resultados anteriores
     resultsGrid.innerHTML = ""
 
-    // Array que guarda os slots criados na tela
-    // Serve para controlarmos a animação depois
-    const slots = []
+    // Exibe botão sortear novamente
+    btnAgain.style.display = "none"
 
     // === FASE 1: CRIAÇÃO DOS SLOTS ===
+    // Array que guarda os slots criados na tela
+    const slots = []
+
     // Para cada número sorteado, cria um slot animado
     for (let i = 0; i < numerosSorteados.length; i++) {
 
@@ -138,11 +105,72 @@ async function mostrarResultados(numerosSorteados) {
         // Guarda o slot no array para controlar depois
         slots.push(resultSlot)
     }
+
+    // === FASE 2: REVELAÇÃO SEQUENCIAL ===
+    for (let i = 0; i < slots.length; i++) {
+    await sleep(500)
+    slots[i].classList.add("is-done")
+    slots[i].querySelector(".slot-number").textContent = numerosSorteados[i]
+  }
+    // === FASE 3: FINALIZAÇÃO ===
+    btnAgain.style.display = "flex"
 }
 
-// Função auxiliar que cria uma pausa artificial no código
-// Retorna uma Promise que é resolvida após X milissegundos
-// Usada com await para criar a revelação sequencial
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms))
+// Executa quando o usuário clicar em Sortear
+form.onsubmit = async (event) => {
+    // Impede o comportamento padrão do formulário (recarregar a página)
+    event.preventDefault()
+
+    // Converte os valores dos inputs para número
+    const inputQtd = Number(qtd.value)
+    const inputMin = Number (min.value)
+    const inputMax = Number (max.value)
+    const naoRepetir = (noRepeat.checked)
+
+    // Calcula quantos números existem no intervalo
+    const range = inputMax - inputMin + 1
+
+    // Exibe alerta caso o valor do limite mínimo do intervalo seja maior que o limite máximo.
+    if (inputMin > inputMax) {
+        return alert ("Não é possível sortear. Diminua o valor do limite mínimo do intervalo")
+    }
+
+    // Exibe alerta caso o valor da quantidade supere o total de números disponíveis do intervalo
+    if (naoRepetir && inputQtd > range) {
+        return alert ("O valor da quantidade é maior que o total de números disponíveis. Por favor diminua a quantidade ou aumente o limite máximo do intervalo.")
+    }
+
+    // Array que armazenará os números sorteados
+    const numerosSorteados = []
+
+    // Loop de sorteio
+    // Continua até atingir a quantidade desejada
+    do {
+        /* Cria uma variável (numeroEscolhido) para receber um número aleatório
+    gerado por Math.random (0 a 0.9999...), que é ajustado ao intervalo
+    multiplicando pelo range e somando o limite mínimo, e então convertido
+    em inteiro com Math.floor */
+        const numeroEscolhido = Math.floor(Math.random() * range) + inputMin
+        
+        if (naoRepetir) {
+            /*  (noRepeat - on) Se o número sorteado AINDA NÃO (!) estiver na na lista de
+               números sorteados, então coloque esse número na lista */
+            if (!numerosSorteados.includes(numeroEscolhido)) {
+                numerosSorteados.push(numeroEscolhido)
+            }
+
+            /* (noRepeat - off) Caso contrário, coloque o número sorteado na lista */
+        } else {
+            numerosSorteados.push(numeroEscolhido)
+        }
+
+    } while (numerosSorteados.length < inputQtd)
+    
+    // Chama a função que cuida da exibição e animação
+    await mostrarResultados(numerosSorteados)
 }
+
+// Ao clicar no botão sortear novamente executa a função resetarTela
+btnAgain.addEventListener("click", () => {
+  resetarTela()
+})
