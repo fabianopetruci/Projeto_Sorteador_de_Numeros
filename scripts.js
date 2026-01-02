@@ -108,7 +108,7 @@ async function mostrarResultados(numerosSorteados) {
 
     // === FASE 2: REVELAÇÃO SEQUENCIAL ===
     for (let i = 0; i < slots.length; i++) {
-    await sleep(500)
+    await sleep(1000)
     slots[i].classList.add("is-done")
     slots[i].querySelector(".slot-number").textContent = numerosSorteados[i]
   }
